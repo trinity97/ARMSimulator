@@ -23,7 +23,18 @@ for i in lines:
 			print(variableMap[i[1]]+"="+variableMap[i[2]]+"+"+i[3][1:])
 	if i[0]=="SWI":
 		if i[1]=="0x6c":
+			print("%(r0)s" % variableMap, end="")
+			print("=int(input())")
+		if i[1]=="0x11":
+			break
+		if i[1]=="0x6b":
 			print("print(%(r1)s)" % variableMap)
+	if i[0]=="SUB":
+		if i[3] in allowedRegisters:
+			print(variableMap[i[1]]+"="+variableMap[i[2]]+"-"+variableMap[i[3]])
+		else:
+			print(variableMap[i[1]]+"="+variableMap[i[2]]+"-"+i[3][1:])
+
 
 file.close()
 # print(file)
