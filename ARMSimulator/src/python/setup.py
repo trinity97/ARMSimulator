@@ -1,5 +1,4 @@
 MEM = []
-
 registers = {}
 firstOperand = 0
 secondOperand = 0
@@ -12,9 +11,18 @@ op_code = 0
 result = 0
 cond = 0
 immediate = 0
+inst = ""
 
-def read_file(name):
+
+def read_file(name,setup):
     file = open(name)
-    MEM = file.read().split("\n")
-    for i in MEM:
-        print(i)
+    setup.MEM = file.read().split("\n")
+
+
+def get_next_instruction(setup):
+    to_return = setup.MEM[setup.PC]
+    setup.PC += 1
+    return to_return
+
+
+
