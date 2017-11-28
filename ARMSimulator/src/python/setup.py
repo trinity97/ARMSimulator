@@ -12,11 +12,13 @@ result = 0
 cond = 0
 immediate = 0
 inst = ""
+maximum = 0
 
 
 def read_file(name,setup):
     file = open(name)
     setup.MEM = file.read().split("\n")
+    setup.maximum = len(setup.MEM)
 
 
 def get_next_instruction(setup):
