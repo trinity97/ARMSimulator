@@ -3,7 +3,7 @@ from ARMSimulator.src.python import setup
 
 def run_arm_simulator():
 
-    while setup.PC<setup.maximum:
+    while setup.flag != 3:
         fetch()
         decode()
         execute()
@@ -18,7 +18,8 @@ def fetch():
 
 def decode():
     address = setup.inst[0:4]
-    instruction = setup.inst[6:]
+    instruction = int(setup.inst[4:],0)
+    setup.flag = (instruction>>26) & 0x3
 
 
 def execute():
