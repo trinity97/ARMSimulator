@@ -1,5 +1,5 @@
 MEM = []
-registers = {}
+registers = []
 firstOperand = 0
 secondOperand = 0
 destination = 0

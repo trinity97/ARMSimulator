@@ -26,7 +26,6 @@ def execute():
     setup.result = 0
 
 
-
 def memory():
     print(2)
 
