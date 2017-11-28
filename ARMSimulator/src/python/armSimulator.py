@@ -26,7 +26,7 @@ def execute():
     setup.result = 0
 
 
-def memory():
+def write_back():
     if setup.flag == 0:
         if setup.op_code != 10:
             setup.registers[setup.destination] = setup.result
@@ -44,5 +44,5 @@ def memory():
         print("WRITEBACK: No writeback operation required")
 
 
-def write_back():
+def memory():
     print(5)
