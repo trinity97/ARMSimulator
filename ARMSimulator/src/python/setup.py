@@ -13,7 +13,7 @@ cond = 0
 immediate = 0
 inst = ""
 maximum = 0
-
+to_be = 0
 
 def read_file(name,setup):
     file = open(name)

@@ -27,7 +27,21 @@ def execute():
 
 
 def memory():
-    print(2)
+    if setup.flag == 0:
+        if setup.op_code != 10:
+            setup.registers[setup.destination] = setup.result
+            print("WRITEBACK: write %d to %d" %(setup.result,setup.destination))
+        else:
+            print("WRITEBACK: no writeback required")
+    elif setup.flag == 1:
+        if setup.op_code == 25:
+            setup.registers[setup.destination] = setup.result
+            print("WRITEBACK: write %d to %d" %(setup.result, setup.destination))
+        elif setup.op_code == 24:
+            setup.to_be = setup.registers[setup.destination]
+            print("WRITEBACK: write %d to memory array" % setup.to_be)
+    elif setup.flag == 2:
+        print("WRITEBACK: No writeback operation required")
 
 
 def write_back():
