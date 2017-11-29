@@ -1,5 +1,6 @@
 import setup
-import numpy
+# import numpy
+import helper
 
 a=0
 b=0
@@ -18,7 +19,7 @@ def run_arm_simulator():
 
 
 def fetch():
-    setup.inst = setup.get_next_instruction(setup)
+    setup.inst = helper.get_next_instruction(setup)
     print("FETCH instruction %s from address %s" % (setup.inst[4:], setup.inst[0:3]))
 
 
@@ -54,7 +55,7 @@ def decode():
         setup.destination = (instruction >> 12) & 0xF
 
         print("DECODE: Operation is %s, Base Register is R%d, Offset is %d, Destination Register is R%d " %
-              (setup.op_to_instruction.get(setup.op_code), setup.firstOperand, setup.secondOperand, setup.destination))
+              (setup.op_to_instruction.get(helper.op_code), setup.firstOperand, setup.secondOperand, setup.destination))
 
     elif setup.flag == 2:
         setup.op_code = (instruction >> 24) & 0x3
@@ -75,28 +76,28 @@ def execute():
 
             if setup.op_code == 0:
 
-                setup.print_execute(0)
+                helper.print_execute(0)
                 setup.result = setup.registers[setup.firstOperand] & setup.registers[setup.secondOperand]
 
             elif setup.op_code == 1:
 
-                setup.print_execute(1)
+                helper.print_execute(1)
                 setup.result = setup.registers[setup.firstOperand] ^ setup.registers[setup.secondOperand]
 
             elif setup.op_code == 2:
-                setup.print_execute(2)
+                helper.print_execute(2)
                 setup.result = setup.registers[setup.firstOperand] - setup.registers[setup.secondOperand]
 
             elif setup.op_code == 4:
-                setup.print_execute(4)
+                helper.print_execute(4)
                 setup.result = setup.registers[setup.firstOperand] + setup.registers[setup.secondOperand]
 
             elif setup.op_code == 5:
-                setup.print_execute(5)
+                helper.print_execute(5)
                 setup.result = setup.registers[setup.firstOperand] + setup.registers[setup.secondOperand]
 
             elif setup.op_code == 10:
-                setup.print_execute(10)
+                helper.print_execute(10)
 
                 if setup.registers[setup.firstOperand] == setup.registers[setup.secondOperand]:
 
@@ -115,7 +116,7 @@ def execute():
                     setup.result = 1
 
             elif setup.op_code == 12:
-                setup.print_execute(12)
+                helper.print_execute(12)
                 setup.result = setup.registers[setup.firstOperand] | setup.registers[setup.secondOperand]
 
             elif setup.op_code == 13:
@@ -130,32 +131,32 @@ def execute():
 
             if setup.op_code == 0:
 
-                setup.print_execute_imm(0)
+                helper.print_execute_imm(0)
                 setup.result = setup.registers[setup.firstOperand] & setup.secondOperand
 
             elif setup.op_code == 1:
 
-                setup.print_execute_imm(1)
+                helper.print_execute_imm(1)
                 setup.result = setup.registers[setup.firstOperand] ^ setup.secondOperand
 
             elif setup.op_code == 2:
 
-                setup.print_execute_imm(2)
+                helper.print_execute_imm(2)
                 setup.result = setup.registers[setup.firstOperand] - setup.secondOperand
 
             elif setup.op_code == 4:
 
-                setup.print_execute_imm(4)
+                helper.print_execute_imm(4)
                 setup.result = setup.registers[setup.firstOperand] + setup.secondOperand
 
             elif setup.op_code == 5:
 
-                setup.print_execute_imm(5)
+                helper.print_execute_imm(5)
                 setup.result = setup.registers[setup.firstOperand] + setup.secondOperand
 
             elif setup.op_code == 10:
 
-                setup.print_execute_imm(10)
+                helper.print_execute_imm(10)
 
                 if setup.registers[setup.firstOperand] == setup.secondOperand:
 
@@ -175,7 +176,7 @@ def execute():
 
             elif setup.op_code == 12:
 
-                setup.print_execute_imm(12)
+                helper.print_execute_imm(12)
                 setup.result = setup.registers[setup.firstOperand] | setup.secondOperand
 
             elif setup.op_code == 13:
@@ -216,14 +217,14 @@ def execute():
 
                 setup.sig = (0xFF000000 | setup.offset)*4
 
-                setup.sig = 0-(setup.invert(setup.sig))
+                setup.sig = 0-(helper.invert(setup.sig))
 
 
             else:
 
                 setup.sig = setup.offset*4
 
-            setup.print_execute_offset(setup.cond)
+            helper.print_execute_offset(setup.cond)
 
             if setup.cond == 0:
 
