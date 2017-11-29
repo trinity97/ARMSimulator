@@ -1,5 +1,4 @@
 import sys
-from PyQt4 import QtGui
 from ARMSimulator.src.python import armSimulator
 
 

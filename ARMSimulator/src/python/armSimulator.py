@@ -1,4 +1,5 @@
 import setup
+import numpy
 
 a=0
 b=0
@@ -59,13 +60,14 @@ def decode():
         setup.op_code = (instruction >> 24) & 0x3
         setup.offset = instruction & 0xFFFFFF
 
+        #print ("-------", setup.cond)
+
         print("DECODE: Operation is %s" %
-              setup.cond_to_instruction.get(setup.op_code))
+              setup.cond_to_instruction.get(setup.cond))
 
 
 def execute():
     setup.result = 0
-    setup.to_be = 0
 
     if setup.flag == 0:
 
@@ -204,65 +206,65 @@ def execute():
 
             setup.print_execute_str(k)
 
-            setup.to_be = hex(id(setup.temp.get(setup.firstOperand)[k]))
-
-
     elif setup.flag == 2:
 
         if setup.op_code == 2:
 
-            bit = ((setup.offset>>23) and 1)
+            bit = ((setup.offset >> 23) & 1)
 
             if bit == 1:
 
-                setup.sig = ((0xFF000000)|(setup.offset*4))
+                setup.sig = (0xFF000000 | setup.offset)*4
+
+                setup.sig = 0-(setup.invert(setup.sig))
+
 
             else:
 
                 setup.sig = setup.offset*4
 
-        setup.print_execute_offset(setup.cond)
+            setup.print_execute_offset(setup.cond)
 
+            if setup.cond == 0:
 
-        if setup.cond == 0:
+                if setup.f1 == 1:
 
-            if setup.f1 == 1:
+                    setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
-                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+            elif setup.cond == 1:
 
-        elif setup.cond == 1:
+                if setup.f1 != 1:
 
-            if setup.f1 != 1:
+                    setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
-                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+            elif setup.cond == 11:
 
-        elif setup.cond == 11:
+                if setup.f2 == 1 and setup.f1 == 0:
 
-            if setup.f2 == 1 and setup.f1 == 0:
+                    setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
-                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+            elif setup.cond == 12:
 
-        elif setup.cond == 12:
+                if setup.f1 == 0 and setup.f2 == 0:
 
-            if setup.f1 == 0 and setup.f2 == 0:
+                    setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
-                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+            elif setup.cond == 13:
 
-        elif setup.cond == 13:
+                if setup.f1 == 1 or setup.f2 == 1:
 
-            if setup.f1 == 1 and setup.f2 == 1:
+                    setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
-                setup.registers[15] = setup.registers[15] + 4 + setup.sig
-
-        elif setup.cond == 14:
-
-            setup.registers[15] = setup.registers[15] + 4 + setup.sig
-
-        elif setup.cond == 10:
-
-            if setup.f1 == 1 and setup.f2 == 0:
+            elif setup.cond == 14:
 
                 setup.registers[15] = setup.registers[15] + 4 + setup.sig
+
+            elif setup.cond == 10:
+
+                if setup.f1 == 1 or setup.f2 == 0:
+
+                    setup.registers[15] = setup.registers[15] + 4 + setup.sig
+
 
 
 def memory():
@@ -293,16 +295,18 @@ def write_back():
             setup.registers[setup.destination] = setup.result
             print("WRITEBACK: write %d to R%d \n" % (setup.result, setup.destination))
         else:
-            print("WRITEBACK: no writeback required")
+            print("WRITEBACK: no writeback required \n")
     elif setup.flag == 1:
         if setup.op_code == 25:
             setup.registers[setup.destination] = setup.result
             print("WRITEBACK: write %d to R%d \n" % (setup.result, setup.destination))
         elif setup.op_code == 24:
-            setup.to_be = setup.registers[setup.destination]
-            print("WRITEBACK: write %d to memory array" % setup.to_be)
+            k = setup.secondOperand//4
+            setup.temp.get(setup.firstOperand)[k] = setup.registers[setup.destination]
+
+            print("WRITEBACK: write %d to memory array" % setup.temp.get(setup.firstOperand)[k])
     elif setup.flag == 2:
-        print("WRITEBACK: No writeback operation required")
+        print("WRITEBACK: No writeback operation required \n")
 
     elif setup.flag == 3:
         print ("EXIT: \n")
