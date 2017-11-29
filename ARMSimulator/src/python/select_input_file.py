@@ -5,12 +5,16 @@ from ARMSimulator.src.python import armSimulator
 
 class Window(QtGui.QMainWindow):
     def __init__(self):
-        super(Window,self).__init__()
+        super(Window, self).__init__()
         self.setWindowTitle("ARM SimSim")
-        self.setGeometry(100,100,500,500)
+        self.setGeometry(100, 100, 500, 500)
         self.show()
+
         self.code_text = QtGui.QTextEdit()
         self.code_text.setReadOnly(True)
+
+        self.out_text = QtGui.QTextEdit()
+        self.out_text.setReadOnly(True)
 
         show_menu_option = QtGui.QAction("&Select Option", self)
         show_menu_option.triggered.connect(self.open_file)
@@ -19,6 +23,7 @@ class Window(QtGui.QMainWindow):
         run_simulator.triggered.connect(armSimulator.run_arm_simulator)
 
         main_menu = self.menuBar()
+
         file_menu = main_menu.addMenu("&Open File")
         file_menu.addAction(show_menu_option)
 
@@ -36,24 +41,21 @@ class Window(QtGui.QMainWindow):
         else:
             print("invalid file")
 
-    def editor(self):
-        code_view = QtGui.QTextEdit()
-        # self.setCentralWidget(code_view)
-        code_view.setReadOnly(True)
-        return code_view
+    # def editor(self):
+    #     code_view = QtGui.QTextEdit()
+    #     code_view.setReadOnly(True)
+    #     return code_view
 
     def make_ui(self):
 
         layout = QtGui.QGridLayout(self)
+
         layout.addWidget(self.code_text, 0, 0)
-        out_text = QtGui.QTextEdit()
-        out_text.setReadOnly(True)
-        layout.addWidget(out_text,1,0)
+        layout.addWidget(self.out_text, 1, 0)
 
         widget = QtGui.QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
-
 
 
 def start_gui():
