@@ -1,3 +1,5 @@
+import sys
+
 MEM = []
 registers = []
 firstOperand = 0
@@ -40,6 +42,23 @@ cond_to_instruction= {0: "BEQ",
                       14: "BAL"
                       }
 
+temp = {0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
+        11: [],
+        12: [],
+        13: [],
+        14: [],
+        15: []}
+
 def read_file(name,setup):
     file = open(name)
     setup.MEM = file.read().split("\n")
@@ -51,13 +70,25 @@ def get_next_instruction(setup):
     setup.PC += 1
     return to_return
 
+def exit():
+
+    sys.exit()
+
+
+
+
+
 def print_execute(index):
-    print("EXECUTE: %s %d and %d \n" % (op_to_instruction.get(index),registers[firstOperand],registers[secondOperand]))
+    print("EXECUTE: %s %d and %d " % (op_to_instruction.get(index),registers[firstOperand],registers[secondOperand]))
 
 def print_execute_imm(index):
-    print("EXECUTE: %s %d and %d \n" % (op_to_instruction.get(index),registers[firstOperand],secondOperand))
+    print("EXECUTE: %s %d and %d " % (op_to_instruction.get(index),registers[firstOperand],secondOperand))
 
 def print_execute_offset(index):
-    print("EXECUTE: %s offest is: %d" % (cond_to_instruction.get(index)), offset)
+    print("EXECUTE: %s offset is: %d" % (cond_to_instruction.get(index)), offset)
 
+def print_execute_ld(num):
+    print("EXECUTE: Put in R%d, R%d's element number %d " % (destination, firstOperand, num+1))
 
+def print_execute_str(num):
+    print("EXECUTE: Put R%d's value in element number %d in R%d " % (firstOperand, num+1, destination))

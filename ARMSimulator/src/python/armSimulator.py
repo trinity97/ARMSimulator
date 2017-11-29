@@ -36,14 +36,14 @@ def decode():
         if setup.immediate ==0:
             setup.secondOperand = instruction & 0xF
 
-            print("DECODE: Operation is %s, First Operand is R%d, Second Operand is R%d, Destination Register is R%d \nRead Registers: R%d = %d, R%d = %d\n" % (setup.op_to_instruction.get(setup.op_code),
+            print("DECODE: Operation is %s, First Operand is R%d, Second Operand is R%d, Destination Register is R%d \nRead Registers: R%d = %d, R%d = %d" % (setup.op_to_instruction.get(setup.op_code),
                   setup.firstOperand, setup.secondOperand, setup.destination, setup.firstOperand,
                   setup.registers[setup.firstOperand], setup.secondOperand, setup.registers[setup.secondOperand]))
 
         elif setup.immediate == 1:
             setup.secondOperand = instruction & 0xFF
 
-            print("DECODE: Operation is %s, First Operand is R%d, immediate Second Operand is %d, Destination Register is R%d \nRead Registers: R%d = %d\n" %
+            print("DECODE: Operation is %s, First Operand is R%d, immediate Second Operand is %d, Destination Register is R%d \nRead Registers: R%d = %d" %
                   (setup.op_to_instruction.get(setup.op_code), setup.firstOperand, setup.secondOperand, setup.destination, setup.firstOperand,setup.registers[setup.firstOperand]))
 
     elif setup.flag == 1:
@@ -52,7 +52,7 @@ def decode():
         setup.secondOperand = instruction & 0xFFF
         setup.destination = (instruction >> 12) & 0xF
 
-        print("DECODE: Operation is %s, Base Register is R%d, Offset is %d, Destination Register is R%d \n" %
+        print("DECODE: Operation is %s, Base Register is R%d, Offset is %d, Destination Register is R%d " %
               (setup.op_to_instruction.get(setup.op_code), setup.firstOperand, setup.secondOperand, setup.destination))
 
     elif setup.flag == 2:
@@ -117,11 +117,11 @@ def execute():
                 setup.result = setup.registers[setup.firstOperand] | setup.registers[setup.secondOperand]
 
             elif setup.op_code == 13:
-                print ("EXECUTE: MOV value of R%d in R%d /n" % (setup.secondOperand, setup.destination))
+                print ("EXECUTE: MOV value of R%d in R%d " % (setup.secondOperand, setup.destination))
                 setup.result = setup.registers[setup.secondOperand]
 
             elif setup.op_code == 15:
-                print ("EXECUTE: MNV NOT of R%d in R%d /n" % (setup.secondOperand, setup.destination))
+                print ("EXECUTE: MNV NOT of R%d in R%d " % (setup.secondOperand, setup.destination))
                 setup.result = ~setup.registers[setup.secondOperand]
 
         elif setup.immediate == 1:
@@ -178,13 +178,13 @@ def execute():
 
             elif setup.op_code == 13:
 
-                print ("EXECUTE: MOV value of R%d in R%d /n" % (setup.secondOperand, setup.destination))
+                print ("EXECUTE: MOV value of %d in R%d " % (setup.secondOperand, setup.destination))
 
                 setup.result = setup.secondOperand
 
             elif setup.op_code == 15:
 
-                print ("EXECUTE: MNV NOT of R%d in R%d /n" % (setup.secondOperand, setup.destination))
+                print ("EXECUTE: MNV NOT of %d in R%d " % (setup.secondOperand, setup.destination))
 
                 setup.result = ~setup.secondOperand
 
@@ -194,9 +194,18 @@ def execute():
 
             k = setup.secondOperand / 4
 
-            if setup.firstOperand == 0:
-                #setup.result =
-                print ("EXECUTE: Put in R%d, R%d's element number %d\n", setup.destination, setup.firstOperand, k+1)
+            setup.print_execute_ld(k)
+
+            setup.result = setup.temp.get(setup.firstOperand)[k]
+
+        elif setup.op_code == 24:
+
+            k = setup.secondOperand / 4
+
+            setup.print_execute_str(k)
+
+            setup.to_be = hex(id(setup.temp.get(setup.firstOperand)[k]))
+
 
     elif setup.flag == 2:
 
@@ -256,37 +265,50 @@ def execute():
                 setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
 
-
-
-
-
-
-
-
-
-
-
-
 def memory():
-    print(5)
 
+    if setup.cond == 14:
+
+        if setup.op_code == 24:
+
+            k = setup.secondOperand/4
+
+            print("MEMORY: Load %d from memory " % (setup.temp.get(setup.firstOperand)[k]))
+
+        elif setup.op_code == 25:
+
+            print("MEMORY: Store %d in memory " % setup.destination)
+
+        else:
+
+            print("MEMORY: No memory operation ")
+
+    else :
+
+        print ("MEMORY: No memory operation ")
 
 def write_back():
     if setup.flag == 0:
         if setup.op_code != 10:
             setup.registers[setup.destination] = setup.result
-            print("WRITEBACK: write %d to %d" % (setup.result, setup.destination))
+            print("WRITEBACK: write %d to R%d \n" % (setup.result, setup.destination))
         else:
             print("WRITEBACK: no writeback required")
     elif setup.flag == 1:
         if setup.op_code == 25:
             setup.registers[setup.destination] = setup.result
-            print("WRITEBACK: write %d to %d" % (setup.result, setup.destination))
+            print("WRITEBACK: write %d to R%d \n" % (setup.result, setup.destination))
         elif setup.op_code == 24:
             setup.to_be = setup.registers[setup.destination]
             print("WRITEBACK: write %d to memory array" % setup.to_be)
     elif setup.flag == 2:
         print("WRITEBACK: No writeback operation required")
+
+    elif setup.flag == 3:
+        print ("EXIT: \n")
+
+
+
 
 
 
