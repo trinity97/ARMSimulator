@@ -14,6 +14,26 @@ immediate = 0
 inst = ""
 maximum = 0
 to_be = 0
+op_to_instruction = {0: "AND",
+                     1: "XOR",
+                     2: "SUB",
+                     4: "ADD",
+                     5: "ADC",
+                     10: "CMP",
+                     12: "ORR",
+                     13: "MOV",
+                     15: "MNV",
+                     24: "STR",
+                     25: "LDR"}
+
+cond_to_instruction= {0: "BEQ",
+                      1: "BNE",
+                      10: "BGE",
+                      11: "BLT",
+                      12: "BGT",
+                      13: "BLE",
+                      14: "BAL"
+                      }
 
 def read_file(name,setup):
     file = open(name)
