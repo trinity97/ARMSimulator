@@ -100,13 +100,13 @@ def execute():
 
                     setup.result = 0
 
-                    f1=1
+                    setup.f1=1
 
                 elif setup.registers[setup.firstOperand] < setup.registers[setup.secondOperand]:
 
                     setup.result = -1
 
-                    f2=1
+                    setup.f2=1
 
                 else:
 
@@ -159,13 +159,13 @@ def execute():
 
                     setup.result = 0
 
-                    f1 = 1
+                    setup.f1 = 1
 
                 elif setup.registers[setup.firstOperand] < setup.secondOperand:
 
                     setup.result = -1
 
-                    f2 = 1
+                    setup.f2 = 1
 
                 else:
 
@@ -180,13 +180,92 @@ def execute():
 
                 print ("EXECUTE: MOV value of R%d in R%d /n" % (setup.secondOperand, setup.destination))
 
-                setup.result = setup.secondOperan
+                setup.result = setup.secondOperand
 
             elif setup.op_code == 15:
 
                 print ("EXECUTE: MNV NOT of R%d in R%d /n" % (setup.secondOperand, setup.destination))
 
                 setup.result = ~setup.secondOperand
+
+    elif setup.flag == 1:
+
+        if setup.op_code == 25:
+
+            k = setup.secondOperand / 4
+
+            if setup.firstOperand == 0:
+                #setup.result =
+                print ("EXECUTE: Put in R%d, R%d's element number %d\n", setup.destination, setup.firstOperand, k+1)
+
+    elif setup.flag == 2:
+
+        if setup.op_code == 2:
+
+            bit = ((setup.offset>>23) and 1)
+
+            if bit == 1:
+
+                setup.sig = ((0xFF000000)|(setup.offset*4))
+
+            else:
+
+                setup.sig = setup.offset*4
+
+        setup.print_execute_offset(setup.cond)
+
+
+        if setup.cond == 0:
+
+            if setup.f1 == 1:
+
+                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+
+        elif setup.cond == 1:
+
+            if setup.f1 != 1:
+
+                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+
+        elif setup.cond == 11:
+
+            if setup.f2 == 1 and setup.f1 == 0:
+
+                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+
+        elif setup.cond == 12:
+
+            if setup.f1 == 0 and setup.f2 == 0:
+
+                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+
+        elif setup.cond == 13:
+
+            if setup.f1 == 1 and setup.f2 == 1:
+
+                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+
+        elif setup.cond == 14:
+
+            setup.registers[15] = setup.registers[15] + 4 + setup.sig
+
+        elif setup.cond == 10:
+
+            if setup.f1 == 1 and setup.f2 == 0:
+
+                setup.registers[15] = setup.registers[15] + 4 + setup.sig
+
+
+
+
+
+
+
+
+
+
+
+
 
 def memory():
     print(5)

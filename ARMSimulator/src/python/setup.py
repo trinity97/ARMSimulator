@@ -14,6 +14,11 @@ immediate = 0
 inst = ""
 maximum = 0
 to_be = 0
+Memory = {}
+sig = 0
+f1 = 0
+f2 = 0
+
 op_to_instruction = {0: "AND",
                      1: "XOR",
                      2: "SUB",
@@ -52,6 +57,7 @@ def print_execute(index):
 def print_execute_imm(index):
     print("EXECUTE: %s %d and %d \n" % (op_to_instruction.get(index),registers[firstOperand],secondOperand))
 
-
+def print_execute_offset(index):
+    print("EXECUTE: %s offest is: %d" % (cond_to_instruction.get(index)), offset)
 
 
