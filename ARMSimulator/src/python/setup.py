@@ -46,5 +46,12 @@ def get_next_instruction(setup):
     setup.PC += 1
     return to_return
 
+def print_execute(index):
+    print("EXECUTE: %s %d and %d \n" % (op_to_instruction.get(index),registers[firstOperand],registers[secondOperand]))
+
+def print_execute_imm(index):
+    print("EXECUTE: %s %d and %d \n" % (op_to_instruction.get(index),registers[firstOperand],secondOperand))
+
+
 
 

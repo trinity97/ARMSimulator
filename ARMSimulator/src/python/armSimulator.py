@@ -1,5 +1,10 @@
 import setup
 
+a=0
+b=0
+c=0
+d=0
+
 
 def run_arm_simulator():
 
@@ -62,7 +67,126 @@ def execute():
     setup.result = 0
     setup.to_be = 0
 
+    if setup.flag == 0:
 
+        if setup.immediate == 0:
+
+            if setup.op_code == 0:
+
+                setup.print_execute(0)
+                setup.result = setup.registers[setup.firstOperand] & setup.registers[setup.secondOperand]
+
+            elif setup.op_code == 1:
+
+                setup.print_execute(1)
+                setup.result = setup.registers[setup.firstOperand] ^ setup.registers[setup.secondOperand]
+
+            elif setup.op_code == 2:
+                setup.print_execute(2)
+                setup.result = setup.registers[setup.firstOperand] - setup.registers[setup.secondOperand]
+
+            elif setup.op_code == 4:
+                setup.print_execute(4)
+                setup.result = setup.registers[setup.firstOperand] + setup.registers[setup.secondOperand]
+
+            elif setup.op_code == 5:
+                setup.print_execute(5)
+                setup.result = setup.registers[setup.firstOperand] + setup.registers[setup.secondOperand]
+
+            elif setup.op_code == 10:
+                setup.print_execute(10)
+
+                if setup.registers[setup.firstOperand] == setup.registers[setup.secondOperand]:
+
+                    setup.result = 0
+
+                    f1=1
+
+                elif setup.registers[setup.firstOperand] < setup.registers[setup.secondOperand]:
+
+                    setup.result = -1
+
+                    f2=1
+
+                else:
+
+                    setup.result = 1
+
+            elif setup.op_code == 12:
+                setup.print_execute(12)
+                setup.result = setup.registers[setup.firstOperand] | setup.registers[setup.secondOperand]
+
+            elif setup.op_code == 13:
+                print ("EXECUTE: MOV value of R%d in R%d /n" % (setup.secondOperand, setup.destination))
+                setup.result = setup.registers[setup.secondOperand]
+
+            elif setup.op_code == 15:
+                print ("EXECUTE: MNV NOT of R%d in R%d /n" % (setup.secondOperand, setup.destination))
+                setup.result = ~setup.registers[setup.secondOperand]
+
+        elif setup.immediate == 1:
+
+            if setup.op_code == 0:
+
+                setup.print_execute_imm(0)
+                setup.result = setup.registers[setup.firstOperand] & setup.secondOperand
+
+            elif setup.op_code == 1:
+
+                setup.print_execute_imm(1)
+                setup.result = setup.registers[setup.firstOperand] ^ setup.secondOperand
+
+            elif setup.op_code == 2:
+
+                setup.print_execute_imm(2)
+                setup.result = setup.registers[setup.firstOperand] - setup.secondOperand
+
+            elif setup.op_code == 4:
+
+                setup.print_execute_imm(4)
+                setup.result = setup.registers[setup.firstOperand] + setup.secondOperand
+
+            elif setup.op_code == 5:
+
+                setup.print_execute_imm(5)
+                setup.result = setup.registers[setup.firstOperand] + setup.secondOperand
+
+            elif setup.op_code == 10:
+
+                setup.print_execute_imm(10)
+
+                if setup.registers[setup.firstOperand] == setup.secondOperand:
+
+                    setup.result = 0
+
+                    f1 = 1
+
+                elif setup.registers[setup.firstOperand] < setup.secondOperand:
+
+                    setup.result = -1
+
+                    f2 = 1
+
+                else:
+
+                    setup.result = 1
+
+            elif setup.op_code == 12:
+
+                setup.print_execute_imm(12)
+                setup.result = setup.registers[setup.firstOperand] | setup.secondOperand
+
+            elif setup.op_code == 13:
+
+                print ("EXECUTE: MOV value of R%d in R%d /n" % (setup.secondOperand, setup.destination))
+
+                setup.result = setup.secondOperan
+
+            elif setup.op_code == 15:
+
+                print ("EXECUTE: MNV NOT of R%d in R%d /n" % (setup.secondOperand, setup.destination))
+
+                setup.result = ~setup.secondOperand
 
 def memory():
     print(5)
