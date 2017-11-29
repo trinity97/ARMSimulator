@@ -55,7 +55,7 @@ def decode():
         setup.destination = (instruction >> 12) & 0xF
 
         print("DECODE: Operation is %s, Base Register is R%d, Offset is %d, Destination Register is R%d " %
-              (setup.op_to_instruction.get(helper.op_code), setup.firstOperand, setup.secondOperand, setup.destination))
+              (setup.op_to_instruction.get(setup.op_code), setup.firstOperand, setup.secondOperand, setup.destination))
 
     elif setup.flag == 2:
         setup.op_code = (instruction >> 24) & 0x3
@@ -195,17 +195,17 @@ def execute():
 
         if setup.op_code == 25:
 
-            k = setup.secondOperand / 4
+            k = setup.secondOperand // 4
 
-            setup.print_execute_ld(k)
+            helper.print_execute_ld(k)
 
             setup.result = setup.temp.get(setup.firstOperand)[k]
 
         elif setup.op_code == 24:
 
-            k = setup.secondOperand / 4
+            k = setup.secondOperand // 4
 
-            setup.print_execute_str(k)
+            helper.print_execute_str(k)
 
     elif setup.flag == 2:
 
@@ -274,7 +274,7 @@ def memory():
 
         if setup.op_code == 24:
 
-            k = setup.secondOperand/4
+            k = setup.secondOperand//4
 
             print("MEMORY: Load %d from memory " % (setup.temp.get(setup.firstOperand)[k]))
 
