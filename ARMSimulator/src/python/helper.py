@@ -21,18 +21,27 @@ def exit():
 
 def print_execute(index):
     print("EXECUTE: %s %d and %d " % (setup.op_to_instruction.get(index),setup.registers[setup.firstOperand],setup.registers[setup.secondOperand]))
+    write_to_out("EXECUTE: "+str(setup.op_to_instruction.get(index))+" "+str(setup.registers[setup.firstOperand]) + " and " + str(setup.registers[setup.secondOperand])+"\n")
 
 def print_execute_imm(index):
     print("EXECUTE: %s %d and %d " % (setup.op_to_instruction.get(index),setup.registers[setup.firstOperand],setup.secondOperand))
+    write_to_out("EXECUTE: "+str(setup.op_to_instruction.get(index))+" "+str(setup.registers[setup.firstOperand]) + " and " + str(setup.secondOperand)+"\n")
+
 
 def print_execute_offset(index):
     print("EXECUTE: %s offset is: %d" % (setup.cond_to_instruction.get(index), setup.offset))
+    write_to_out("EXECUTE: "+str(setup.op_to_instruction.get(index))+" offset is: "+str(setup.offset)+"\n")
+
 
 def print_execute_ld(num):
     print("EXECUTE: Put in R%d, R%d's element number %d " % (setup.destination, setup.firstOperand, num+1))
+    write_to_out("EXECUTE: Put in R" + str(setup.destination) + ",R"+ str(setup.firstOperand) +"'s element number "+ str(num+1)+"\n")
+
 
 def print_execute_str(num):
     print("EXECUTE: Put R%d's value in element number %d in R%d " % (setup.firstOperand, num+1, setup.destination))
+    write_to_out("EXECUTE: Put R"+str(setup.firstOperand)+"'s value in element number "+ str(num+1) + " in R"+ str(setup.destination)+"\n")
+
 
 
 def int2bin(i):
@@ -71,3 +80,9 @@ def invert(num):
             emp+="1"
     ans = binToInt(emp+notChange)
     return int(ans)
+
+def write_to_out(s):
+    file = open("../../output/output.txt", "a")
+    file.write(s)
+    file.close()  # This close() is important
+
