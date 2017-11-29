@@ -1,6 +1,6 @@
 import sys
 
-MEM = []
+MEM = [0] * 1000
 registers = []
 firstOperand = 0
 secondOperand = 0
@@ -15,7 +15,6 @@ cond = 0
 immediate = 0
 inst = ""
 maximum = 0
-to_be = 0
 Memory = {}
 sig = 0
 f1 = 0
@@ -42,22 +41,22 @@ cond_to_instruction= {0: "BEQ",
                       14: "BAL"
                       }
 
-temp = {0: [],
-        1: [],
-        2: [],
-        3: [],
-        4: [],
-        5: [],
-        6: [],
-        7: [],
-        8: [],
-        9: [],
-        10: [],
-        11: [],
-        12: [],
-        13: [],
-        14: [],
-        15: []}
+temp = {0: [0] * 1024,
+        1: [0] * 1024,
+        2: [0] * 1024,
+        3: [0] * 1024,
+        4: [0] * 1024,
+        5: [0] * 1024,
+        6: [0] * 1024,
+        7: [0] * 1024,
+        8: [0] * 1024,
+        9: [0] * 1024,
+        10: [0] * 1024,
+        11: [0] * 1024,
+        12: [0] * 1024,
+        13: [0] * 1024,
+        14: [0] * 1024,
+        15: [0] * 1024}
 
 def read_file(name,setup):
     file = open(name)
@@ -66,8 +65,10 @@ def read_file(name,setup):
 
 
 def get_next_instruction(setup):
-    to_return = setup.MEM[setup.PC]
-    setup.PC += 1
+    print("*******",setup.registers[15]//4)
+    to_return = setup.MEM[setup.registers[15]//4]
+    setup.registers[15] += 4
+
     return to_return
 
 def exit():
@@ -85,7 +86,7 @@ def print_execute_imm(index):
     print("EXECUTE: %s %d and %d " % (op_to_instruction.get(index),registers[firstOperand],secondOperand))
 
 def print_execute_offset(index):
-    print("EXECUTE: %s offset is: %d" % (cond_to_instruction.get(index)), offset)
+    print("EXECUTE: %s offset is: %d" % (cond_to_instruction.get(index), offset))
 
 def print_execute_ld(num):
     print("EXECUTE: Put in R%d, R%d's element number %d " % (destination, firstOperand, num+1))
