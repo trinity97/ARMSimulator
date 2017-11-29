@@ -21,6 +21,8 @@ sig = 0
 f1 = 0
 f2 = 0
 
+gui = 0
+
 op_to_instruction = {0: "AND",
                      1: "XOR",
                      2: "SUB",

@@ -2,7 +2,8 @@ import sys
 from PyQt4 import QtGui
 from ARMSimulator.src.python import armSimulator
 import helper
-
+import setup
+import time
 
 class Window(QtGui.QMainWindow):
     def __init__(self):
@@ -32,20 +33,29 @@ class Window(QtGui.QMainWindow):
         run_menu.addAction(run_simulator)
 
     def open_file(self):
+        helper.reset_values()
+        file = open("../../output/output.txt", "w").close()
+        self.out_text.clear()
         name = QtGui.QFileDialog.getOpenFileName(QtGui.QFileDialog(), "Open File")
         self.make_ui()
         if name:
             file = open(name, 'r')
+            helper.read_file(name)
             with file:
                 text = file.read()
                 self.code_text.setText(text)
         else:
             print("invalid file")
 
-    # def editor(self):
-    #     code_view = QtGui.QTextEdit()
-    #     code_view.setReadOnly(True)
-    #     return code_view
+    def editor(self,string):
+        # file = open("../../output/output.txt", "r")
+        # with file:
+        #     text = file.read()
+            # self.out_text.clear()
+        self.out_text.append(string)
+        QtGui.QApplication.processEvents()
+        time.sleep(0.07)
+        # file.close()
 
     def make_ui(self):
 
@@ -61,5 +71,5 @@ class Window(QtGui.QMainWindow):
 
 def start_gui():
     app = QtGui.QApplication(sys.argv)
-    gui = Window()
+    setup.gui = Window()
     app.exec_()

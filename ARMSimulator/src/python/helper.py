@@ -1,7 +1,8 @@
 import sys
 import setup
 
-def read_file(name,setup):
+
+def read_file(name):
     file = open(name)
     setup.MEM = file.read().split("\n")
     setup.maximum = len(setup.MEM)
@@ -14,8 +15,8 @@ def get_next_instruction(setup):
 
     return to_return
 
-def exit():
 
+def exit():
     sys.exit()
 
 
@@ -86,3 +87,29 @@ def write_to_out(s):
     file.write(s)
     file.close()  # This close() is important
 
+
+def reset_values():
+    setup.MEM = [0] * 1000
+    setup.registers = []
+    setup.firstOperand = 0
+    setup.secondOperand = 0
+    setup.destination = 0
+    setup.PC = 0
+    setup.offset = 0
+    setup.address = 0x0
+    setup.flag = 0
+    setup.op_code = 0
+    setup.result = 0
+    setup.cond = 0
+    setup.immediate = 0
+    setup.inst = ""
+    setup.maximum = 0
+    setup.Memory = {}
+    setup.sig = 0
+    setup.f1 = 0
+    setup.f2 = 0
+
+    for i in range(16):
+        setup.registers.append(0)
+
+    # setup.gui = 0

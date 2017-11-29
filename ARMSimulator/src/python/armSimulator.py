@@ -1,6 +1,7 @@
 import setup
 # import numpy
 import helper
+import select_input_file
 
 a=0
 b=0
@@ -17,13 +18,15 @@ def run_arm_simulator():
         memory()
         write_back()
         helper.write_to_out("\n")
+        # setup.gui.editor()
 
 
 def fetch():
     setup.inst = helper.get_next_instruction(setup)
+    print(setup.inst)
     print("FETCH instruction %s from address %s" % (setup.inst[4:], setup.inst[0:3]))
     helper.write_to_out("FETCH instruction "+ str(setup.inst[4:])+" from address "+str(setup.inst[0:3]+"\n"))
-
+    setup.gui.editor("FETCH instruction "+ str(setup.inst[4:])+" from address "+str(setup.inst[0:3]+"\n"))
 
 
 def decode():
@@ -45,6 +48,7 @@ def decode():
                   setup.firstOperand, setup.secondOperand, setup.destination, setup.firstOperand,
                   setup.registers[setup.firstOperand], setup.secondOperand, setup.registers[setup.secondOperand]))
             helper.write_to_out("DECODE: Operation is "+ str(setup.op_to_instruction.get(setup.op_code))+ ", First Operand is R"+ str(setup.firstOperand) + ", Second Operand is R"+ str(setup.secondOperand)+ ", Destination Register is R"+ str(setup.destination)+ " \nRead Registers: R"+ str(setup.firstOperand)+ " = "+ str(setup.registers[setup.firstOperand]) + ", R"+ str(setup.secondOperand) + " = " + str(setup.registers[setup.secondOperand])+"\n")
+            setup.gui.editor("DECODE: Operation is "+ str(setup.op_to_instruction.get(setup.op_code))+ ", First Operand is R"+ str(setup.firstOperand) + ", Second Operand is R"+ str(setup.secondOperand)+ ", Destination Register is R"+ str(setup.destination)+ " \nRead Registers: R"+ str(setup.firstOperand)+ " = "+ str(setup.registers[setup.firstOperand]) + ", R"+ str(setup.secondOperand) + " = " + str(setup.registers[setup.secondOperand])+"\n")
 
         elif setup.immediate == 1:
             setup.secondOperand = instruction & 0xFF
@@ -53,7 +57,7 @@ def decode():
                   (setup.op_to_instruction.get(setup.op_code), setup.firstOperand, setup.secondOperand, setup.destination, setup.firstOperand,setup.registers[setup.firstOperand]))
 
             helper.write_to_out("DECODE: Operation is "+ str(setup.op_to_instruction.get(setup.op_code))+ ", First Operand is R"+ str(setup.firstOperand) + ", immediate Second Operand is "+ str(setup.secondOperand)+ ", Destination Register is R"+ str(setup.destination)+ " \nRead Registers: R"+ str(setup.firstOperand)+ " = "+ str(setup.registers[setup.firstOperand]) + "\n")
-
+            setup.gui.editor("DECODE: Operation is "+ str(setup.op_to_instruction.get(setup.op_code))+ ", First Operand is R"+ str(setup.firstOperand) + ", immediate Second Operand is "+ str(setup.secondOperand)+ ", Destination Register is R"+ str(setup.destination)+ " \nRead Registers: R"+ str(setup.firstOperand)+ " = "+ str(setup.registers[setup.firstOperand]) + "\n")
 
     elif setup.flag == 1:
         setup.op_code = (instruction >> 20) & 0x3F
@@ -65,6 +69,7 @@ def decode():
               (setup.op_to_instruction.get(setup.op_code), setup.firstOperand, setup.secondOperand, setup.destination))
 
         helper.write_to_out("DECODE: Operation is "+str(setup.op_to_instruction.get(setup.op_code))+", Base Register is R" + str(setup.firstOperand) +", Offset is "+str(setup.secondOperand)+", Destination Register is R"+str(setup.destination)+"\n")
+        setup.gui.editor("DECODE: Operation is "+str(setup.op_to_instruction.get(setup.op_code))+", Base Register is R" + str(setup.firstOperand) +", Offset is "+str(setup.secondOperand)+", Destination Register is R"+str(setup.destination)+"\n")
 
     elif setup.flag == 2:
         setup.op_code = (instruction >> 24) & 0x3
@@ -75,6 +80,7 @@ def decode():
         print("DECODE: Operation is %s" %
               setup.cond_to_instruction.get(setup.cond))
         helper.write_to_out("DECODE: Operation is "+str(setup.cond_to_instruction.get(setup.cond))+"\n")
+        setup.gui.editor("DECODE: Operation is "+str(setup.cond_to_instruction.get(setup.cond))+"\n")
 
 
 def execute():
@@ -132,12 +138,14 @@ def execute():
             elif setup.op_code == 13:
                 print ("EXECUTE: MOV value of R%d in R%d " % (setup.secondOperand, setup.destination))
                 helper.write_to_out("EXECUTE: MOV value of R" + str(setup.secondOperand) + " in R" + str(setup.destination) + "\n")
+                setup.gui.editor("EXECUTE: MOV value of R" + str(setup.secondOperand) + " in R" + str(setup.destination) + "\n")
                 setup.result = setup.registers[setup.secondOperand]
 
             elif setup.op_code == 15:
                 print ("EXECUTE: MNV NOT of R%d in R%d " % (setup.secondOperand, setup.destination))
                 setup.result = ~setup.registers[setup.secondOperand]
                 helper.write_to_out("EXECUTE: MNV NOT of R" + str(setup.secondOperand) + " in R" + str(setup.destination) + "\n")
+                setup.gui.editor("EXECUTE: MNV NOT of R" + str(setup.secondOperand) + " in R" + str(setup.destination) + "\n")
 
         elif setup.immediate == 1:
 
@@ -195,13 +203,14 @@ def execute():
 
                 print ("EXECUTE: MOV value of %d in R%d " % (setup.secondOperand, setup.destination))
                 helper.write_to_out("EXECUTE: MOV value of " + str(setup.secondOperand) + " in R" + str(setup.destination) + "\n")
+                setup.gui.editor("EXECUTE: MOV value of " + str(setup.secondOperand) + " in R" + str(setup.destination) + "\n")
 
                 setup.result = setup.secondOperand
 
             elif setup.op_code == 15:
 
                 print ("EXECUTE: MNV NOT of %d in R%d " % (setup.secondOperand, setup.destination))
-                helper.write_to_out("EXECUTE: MNV NOT of "+ str(setup.secondOperand) +" in R"+ str(setup.destination) +"\n")
+                setup.gui.editor("EXECUTE: MNV NOT of "+ str(setup.secondOperand) +" in R"+ str(setup.destination) +"\n")
 
                 setup.result = ~setup.secondOperand
 
@@ -232,8 +241,6 @@ def execute():
                 setup.sig = (0xFF000000 | setup.offset)*4
 
                 setup.sig = 0-(helper.invert(setup.sig))
-
-
             else:
 
                 setup.sig = setup.offset*4
@@ -245,41 +252,34 @@ def execute():
                 if setup.f1 == 1:
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
-
             elif setup.cond == 1:
 
                 if setup.f1 != 1:
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
-
             elif setup.cond == 11:
 
                 if setup.f2 == 1 and setup.f1 == 0:
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
-
             elif setup.cond == 12:
 
                 if setup.f1 == 0 and setup.f2 == 0:
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
-
             elif setup.cond == 13:
 
                 if setup.f1 == 1 or setup.f2 == 1:
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
-
             elif setup.cond == 14:
 
                 setup.registers[15] = setup.registers[15] + 4 + setup.sig
-
             elif setup.cond == 10:
 
                 if setup.f1 == 1 or setup.f2 == 0:
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
-
 
 
 def memory():
@@ -292,21 +292,24 @@ def memory():
 
             print("MEMORY: Load %d from memory " % (setup.temp.get(setup.firstOperand)[k]))
             helper.write_to_out("MEMORY: Load "+str(setup.temp.get(setup.firstOperand)[k])+" from memory \n")
+            setup.gui.editor("MEMORY: Load "+str(setup.temp.get(setup.firstOperand)[k])+" from memory \n")
 
         elif setup.op_code == 25:
 
             print("MEMORY: Store %d in memory " % setup.destination)
             helper.write_to_out("MEMORY: Store "+str(setup.destination)+" in memory \n")
+            setup.gui.editor("MEMORY: Store "+str(setup.destination)+" in memory \n")
 
         else:
 
             print("MEMORY: No memory operation ")
             helper.write_to_out("MEMORY: No memory operation \n")
+            setup.gui.editor("MEMORY: No memory operation \n")
 
-    else :
-
-        print ("MEMORY: No memory operation ")
+    else:
+        print("MEMORY: No memory operation ")
         helper.write_to_out("MEMORY: No memory operation \n")
+        setup.gui.editor("MEMORY: No memory operation \n")
 
 
 def write_back():
@@ -315,41 +318,29 @@ def write_back():
             setup.registers[setup.destination] = setup.result
             print("WRITEBACK: write %d to R%d \n" % (setup.result, setup.destination))
             helper.write_to_out("WRITEBACK: write "+str(setup.result)+" to R"+str(setup.destination)+" \n")
-
-
+            setup.gui.editor("WRITEBACK: write "+str(setup.result)+" to R"+str(setup.destination)+" \n")
         else:
             print("WRITEBACK: no writeback required \n")
             helper.write_to_out("WRITEBACK: no writeback required \n")
-
-
+            setup.gui.editor("WRITEBACK: no writeback required \n")
     elif setup.flag == 1:
         if setup.op_code == 25:
             setup.registers[setup.destination] = setup.result
             print("WRITEBACK: write %d to R%d \n" % (setup.result, setup.destination))
             helper.write_to_out("WRITEBACK: write "+str(setup.result)+" to R"+str(setup.destination)+" \n")
-
-
+            setup.gui.editor("WRITEBACK: write "+str(setup.result)+" to R"+str(setup.destination)+" \n")
         elif setup.op_code == 24:
             k = setup.secondOperand//4
             setup.temp.get(setup.firstOperand)[k] = setup.registers[setup.destination]
 
             print("WRITEBACK: write %d to memory array" % setup.temp.get(setup.firstOperand)[k])
             helper.write_to_out("WRITEBACK: write "+str(setup.temp.get(setup.firstOperand)[k])+" to memory array \n")
-
+            setup.gui.editor("WRITEBACK: write "+str(setup.temp.get(setup.firstOperand)[k])+" to memory array \n")
     elif setup.flag == 2:
         print("WRITEBACK: No writeback operation required \n")
         helper.write_to_out("WRITEBACK: No writeback operation required \n")
-
+        setup.gui.editor("WRITEBACK: No writeback operation required \n")
     elif setup.flag == 3:
         print ("EXIT: \n")
         helper.write_to_out("EXIT: \n")
-
-
-
-
-
-
-
-
-
-
+        setup.gui.editor("EXIT: \n")
