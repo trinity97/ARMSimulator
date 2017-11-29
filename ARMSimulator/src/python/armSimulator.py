@@ -1,4 +1,5 @@
 import setup
+import numpy
 
 a=0
 b=0
@@ -213,13 +214,14 @@ def execute():
 
             if bit == 1:
 
-                setup.sig = 0xFF000000 | (setup.offset*4)
+                setup.sig = (0xFF000000 | setup.offset)*4
+
+                setup.sig = 0-(setup.invert(setup.sig))
+
 
             else:
 
                 setup.sig = setup.offset*4
-
-            print("///////////", setup.sig)
 
             setup.print_execute_offset(setup.cond)
 
@@ -249,7 +251,7 @@ def execute():
 
             elif setup.cond == 13:
 
-                if setup.f1 == 1 and setup.f2 == 1:
+                if setup.f1 == 1 or setup.f2 == 1:
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
@@ -259,11 +261,10 @@ def execute():
 
             elif setup.cond == 10:
 
-                if setup.f1 == 1 and setup.f2 == 0:
+                if setup.f1 == 1 or setup.f2 == 0:
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
-            print ("----------------",setup.registers[15])
 
 
 def memory():
