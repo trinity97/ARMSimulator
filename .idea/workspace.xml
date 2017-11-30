@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02804b2a-8301-4232-884b-b8808f5e229d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ARMSimulator/input/swi_test.mem" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ARMSimulator/output/output.txt" afterPath="$PROJECT_DIR$/ARMSimulator/output/output.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ARMSimulator/src/python/armSimulator.py" afterPath="$PROJECT_DIR$/ARMSimulator/src/python/armSimulator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ARMSimulator/src/python/select_input_file.py" afterPath="$PROJECT_DIR$/ARMSimulator/src/python/select_input_file.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ARMSimulator/src/python/helper.py" afterPath="$PROJECT_DIR$/ARMSimulator/src/python/helper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,10 +19,25 @@
       <file leaf-file-name="armSimulator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ARMSimulator/src/python/armSimulator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="367" column="44" lean-forward="false" selection-start-line="367" selection-start-column="44" selection-end-line="367" selection-end-column="44" />
+            <state relative-caret-position="170">
+              <caret line="379" column="25" lean-forward="true" selection-start-line="379" selection-start-column="25" selection-end-line="379" selection-end-column="25" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
+                <marker date="1512065721400" expanded="true" signature="12477:13804" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="12768:13626" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="12801:13151" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="13186:13431" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="13446:13626" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="13637:13804" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="13848:14452" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="13880:14242" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="14256:14452" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="14478:15363" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="14510:14872" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="14906:15363" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="15389:15603" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="15699:15814" ph="..." />
+                <marker date="1512065721400" expanded="true" signature="15841:16207" ph="..." />
               </folding>
             </state>
           </provider>
@@ -55,8 +68,8 @@
       <file leaf-file-name="helper.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ARMSimulator/src/python/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="23" column="27" lean-forward="false" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+            <state relative-caret-position="140">
+              <caret line="12" column="45" lean-forward="true" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -67,8 +80,8 @@
       <file leaf-file-name="select_input_file.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ARMSimulator/src/python/select_input_file.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-336">
-              <caret line="69" column="27" lean-forward="true" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
+            <state relative-caret-position="184">
+              <caret line="82" column="21" lean-forward="false" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -99,10 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setup.flag</find>
-      <find>get_n</find>
-      <find>get_nex</find>
-      <find>get_next</find>
       <find>setu</find>
       <find>g</find>
       <find>get</find>
@@ -129,6 +138,10 @@
       <find>setup.re</find>
       <find>setup.regi</find>
       <find>setup.register</find>
+      <find>*</find>
+      <find>**</find>
+      <find>***</find>
+      <find>****</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -146,10 +159,10 @@
         <option value="$PROJECT_DIR$/ARMSimulator/output/output.txt" />
         <option value="$PROJECT_DIR$/ARMSimulator/src/python/setup.py" />
         <option value="$PROJECT_DIR$/ARMSimulator/src/python/main.py" />
-        <option value="$PROJECT_DIR$/ARMSimulator/src/python/helper.py" />
         <option value="$PROJECT_DIR$/ARMSimulator/src/python/select_input_file.py" />
         <option value="$PROJECT_DIR$/ARMSimulator/input/swi_test.mem" />
         <option value="$PROJECT_DIR$/ARMSimulator/src/python/armSimulator.py" />
+        <option value="$PROJECT_DIR$/ARMSimulator/src/python/helper.py" />
       </list>
     </option>
   </component>
@@ -542,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512052565276</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="commit to survive">
+      <created>1512064711166</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1512064711166</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -577,7 +597,8 @@
     <MESSAGE value="minor error correction" />
     <MESSAGE value="live updates happening" />
     <MESSAGE value="Live Register Update and Step Into done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Live Register Update and Step Into done" />
+    <MESSAGE value="commit to survive" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit to survive" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -592,6 +613,21 @@
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
+            <marker date="1512065721400" expanded="true" signature="12477:13804" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="12768:13626" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="12801:13151" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13186:13431" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13446:13626" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13637:13804" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13848:14452" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13880:14242" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="14256:14452" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="14478:15363" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="14510:14872" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="14906:15363" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="15389:15603" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="15699:15814" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="15841:16207" ph="..." />
           </folding>
         </state>
       </provider>
@@ -670,6 +706,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ARMSimulator/src/python/armSimulator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="379" column="25" lean-forward="true" selection-start-line="379" selection-start-column="25" selection-end-line="379" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+            <marker date="1512065721400" expanded="true" signature="12477:13804" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="12768:13626" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="12801:13151" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13186:13431" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13446:13626" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13637:13804" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13848:14452" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="13880:14242" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="14256:14452" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="14478:15363" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="14510:14872" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="14906:15363" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="15389:15603" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="15699:15814" ph="..." />
+            <marker date="1512065721400" expanded="true" signature="15841:16207" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ARMSimulator/src/python/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
@@ -682,28 +743,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ARMSimulator/src/python/select_input_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-336">
-          <caret line="69" column="27" lean-forward="true" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
+        <state relative-caret-position="184">
+          <caret line="82" column="21" lean-forward="false" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ARMSimulator/src/python/armSimulator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="367" column="44" lean-forward="false" selection-start-line="367" selection-start-column="44" selection-end-line="367" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ARMSimulator/src/python/helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" column="27" lean-forward="false" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+        <state relative-caret-position="140">
+          <caret line="12" column="45" lean-forward="true" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

@@ -24,6 +24,5 @@ MEMORY: No memory operation
 WRITEBACK: 10 is Written to Console from Register 1
 FETCH instruction  0xEF000011 from address 0x1
 DECODE: Operation is Exit 
-MEMORY: No memory operation 
 EXIT: 
 

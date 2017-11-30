@@ -9,7 +9,7 @@ def read_file(name):
 
 
 def get_next_instruction(setup):
-    print("*******",setup.registers[15]//4)
+    # print("*******",setup.registers[15]//4)
     to_return = setup.MEM[setup.registers[15]//4]
     setup.registers[15] += 4
 
