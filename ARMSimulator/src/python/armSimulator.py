@@ -11,7 +11,7 @@ d=0
 
 def run_arm_simulator():
 
-    while True:
+    while not(setup.flag == 3 and (int(setup.inst[4:], 0) & 0xFF)):
         fetch()
         decode()
         execute()
@@ -299,7 +299,7 @@ def execute():
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
-    elif setup.flag == 3:
+    elif setup.flag == 3 and (int(setup.inst[4:], 0) & 0xFF) != 0x11:
 
         print("EXECUTE: No Execution \n")
         helper.write_to_out("EXECUTE: No Execution \n")
@@ -365,7 +365,7 @@ def write_back():
         helper.write_to_out("WRITEBACK: No writeback operation required \n")
         setup.gui.editor("WRITEBACK: No writeback operation required \n")
     elif setup.flag == 3:
-        mask = int(setup.inst[4:0], 0) & 0xFF
+        mask = int(setup.inst[4:], 0) & 0xFF
         if mask == 0x11:
             print("EXIT: \n")
             helper.write_to_out("EXIT: \n")
