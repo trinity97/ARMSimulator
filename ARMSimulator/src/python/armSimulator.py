@@ -11,7 +11,7 @@ d=0
 
 def run_arm_simulator():
 
-    while not(setup.flag == 3 and (int(setup.inst[4:], 0) & 0xFF)):
+    while not(setup.flag == 3 and (int(setup.inst[4:], 0) & 0xFF) == 0x11):
         fetch()
         decode()
         execute()
@@ -372,13 +372,13 @@ def write_back():
             setup.gui.editor("EXIT: \n")
         elif mask == 0x6C:
             helper.read()
-            print("WRITEBACK: %s is Read from Console and stored in Register 0" % str(setup.register[0]))
-            helper.write_to_out("WRITEBACK: %s is Read from File and stored in Register 0" % str(setup.register[0]))
-            setup.gui.editor("WRITEBACK: %s is Read from File and stored in Register 0" % str(setup.register[0]))
+            print("WRITEBACK: %s is Read from Console and stored in Register 0" % str(setup.registers[0]))
+            helper.write_to_out("WRITEBACK: %s is Read from File and stored in Register 0" % str(setup.registers[0]))
+            setup.gui.editor("WRITEBACK: %s is Read from File and stored in Register 0" % str(setup.registers[0]))
         elif mask == 0x6B:
             helper.write()
-            print("WRITEBACK: %s is Written to Console from Register 1" % str(setup.register[1]))
-            helper.write_to_out("WRITEBACK: %s is Written to Console from Register 1" % str(setup.register[1]))
-            setup.gui.editor("WRITEBACK: %s is Written to Console from Register 1" % str(setup.register[1]))
+            print("WRITEBACK: %s is Written to Console from Register 1" % str(setup.registers[1]))
+            helper.write_to_out("WRITEBACK: %s is Written to Console from Register 1" % str(setup.registers[1]))
+            setup.gui.editor("WRITEBACK: %s is Written to Console from Register 1" % str(setup.registers[1]))
 
     setup.gui.registers()

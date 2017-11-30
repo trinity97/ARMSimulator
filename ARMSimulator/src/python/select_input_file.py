@@ -1,5 +1,6 @@
 import sys
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
+from PyQt4.QtCore import pyqtSlot
 from ARMSimulator.src.python import armSimulator
 import helper
 import setup
@@ -18,8 +19,13 @@ class Window(QtGui.QMainWindow):
         self.code_text = QtGui.QTextEdit()
         self.code_text.setReadOnly(True)
 
+
+
         self.out_text = QtGui.QTextEdit()
         self.out_text.setReadOnly(True)
+
+        self.input_box = QtGui.QLineEdit()
+        self.input_box.editingFinished.connect(self.events)
 
         show_menu_option = QtGui.QAction("&Select Option", self)
         show_menu_option.triggered.connect(self.open_file)
@@ -70,7 +76,13 @@ class Window(QtGui.QMainWindow):
         self.register_values.setText(self.registers_construct())
         QtGui.QApplication.processEvents()
 
-
+    @pyqtSlot()
+    def events(self):
+        out = self.input_box.displayText()
+        if 0x6C == (int(setup.inst[4:],0) & 0xFF):
+            setup.registers[0] = int(out)
+        else:
+            print("invalid")
 
     def make_ui(self):
 
@@ -80,7 +92,8 @@ class Window(QtGui.QMainWindow):
         layout.addWidget(self.out_text, 1, 0, 1, 2)
         layout.setColumnStretch(0, 1)
         layout.setColumnStretch(1, 4)
-
+        layout.addWidget(self.input_box,2,0,1,2)
+        layout.setRowStretch(2,1)
         widget = QtGui.QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
