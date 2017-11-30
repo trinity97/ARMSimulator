@@ -12,6 +12,9 @@ class Window(QtGui.QMainWindow):
         self.setGeometry(100, 100, 500, 500)
         self.show()
 
+        self.register_values = QtGui.QTextEdit()
+        self.register_values.setReadOnly(True)
+
         self.code_text = QtGui.QTextEdit()
         self.code_text.setReadOnly(True)
 
@@ -24,6 +27,9 @@ class Window(QtGui.QMainWindow):
         run_simulator = QtGui.QAction("&Run", self)
         run_simulator.triggered.connect(armSimulator.run_arm_simulator)
 
+        step_into = QtGui.QAction("&Step Into", self)
+        step_into.triggered.connect(armSimulator.step_into)
+
         main_menu = self.menuBar()
 
         file_menu = main_menu.addMenu("&Open File")
@@ -31,6 +37,8 @@ class Window(QtGui.QMainWindow):
 
         run_menu = main_menu.addMenu("&Run Simulator")
         run_menu.addAction(run_simulator)
+        run_menu.addAction(step_into)
+
 
     def open_file(self):
         helper.reset_values()
@@ -48,21 +56,30 @@ class Window(QtGui.QMainWindow):
             print("invalid file")
 
     def editor(self,string):
-        # file = open("../../output/output.txt", "r")
-        # with file:
-        #     text = file.read()
-            # self.out_text.clear()
         self.out_text.append(string)
         QtGui.QApplication.processEvents()
-        time.sleep(0.07)
-        # file.close()
+
+    def registers_construct(self):
+        s = ''
+        for i in range(16):
+            s += 'R' + str(i) + " : " +str(setup.registers[i]) + '\n'
+
+        return s
+
+    def registers(self):
+        self.register_values.setText(self.registers_construct())
+        QtGui.QApplication.processEvents()
+
+
 
     def make_ui(self):
 
         layout = QtGui.QGridLayout(self)
-
-        layout.addWidget(self.code_text, 0, 0)
-        layout.addWidget(self.out_text, 1, 0)
+        layout.addWidget( self.register_values, 0, 0)
+        layout.addWidget(self.code_text, 0, 1)
+        layout.addWidget(self.out_text, 1, 0, 1, 2)
+        layout.setColumnStretch(0, 1)
+        layout.setColumnStretch(1, 4)
 
         widget = QtGui.QWidget()
         widget.setLayout(layout)

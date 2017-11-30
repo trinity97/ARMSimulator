@@ -21,6 +21,15 @@ def run_arm_simulator():
         # setup.gui.editor()
 
 
+def step_into():
+
+    fetch()
+    decode()
+    execute()
+    memory()
+    write_back()
+    helper.write_to_out("\n")
+
 def fetch():
     setup.inst = helper.get_next_instruction(setup)
     print(setup.inst)
@@ -344,3 +353,4 @@ def write_back():
         print ("EXIT: \n")
         helper.write_to_out("EXIT: \n")
         setup.gui.editor("EXIT: \n")
+    setup.gui.registers()
