@@ -308,6 +308,12 @@ def execute():
 
 def memory():
 
+    if(setup.flag == 3):
+        if not ((int(setup.inst[4:], 0) & 0xFF) == 0x11):
+            print("MEMORY: No memory operation ")
+            helper.write_to_out("MEMORY: No memory operation \n")
+            setup.gui.editor("MEMORY: No memory operation \n")
+
     if setup.cond == 14:
 
         if setup.op_code == 24:
