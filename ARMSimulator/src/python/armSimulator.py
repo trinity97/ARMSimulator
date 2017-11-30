@@ -314,7 +314,7 @@ def memory():
             helper.write_to_out("MEMORY: No memory operation \n")
             setup.gui.editor("MEMORY: No memory operation \n")
 
-    if setup.cond == 14:
+    elif setup.cond == 14:
 
         if setup.op_code == 24:
 
