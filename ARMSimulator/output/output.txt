@@ -1,28 +1,161 @@
-FETCH instruction 0xEF00006C from address 0x0
-DECODE: Operation is Read integer from file 
-EXECUTE: No Execution 
+FETCH instruction 0xE3A02000 from address 0x0
+DECODE: Operation is MOV, First Operand is R0, immediate Second Operand is 0, Destination Register is R2 
+Read Registers: R0 = 0
+EXECUTE: MOV value of 0 in R2
 MEMORY: No memory operation 
-WRITEBACK: 10 is Read from File and stored in Register 0
-FETCH instruction 0xE1A01000 from address 0x4
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R0, Destination Register is R1 
-Read Registers: R0 = 10, R0 = 10
-EXECUTE: MOV value of R0 in R1
-MEMORY: No memory operation 
-WRITEBACK: write 10 to R1 
+WRITEBACK: write 0 to R2 
 
-FETCH instruction 0xE3A00001 from address 0x8
-DECODE: Operation is MOV, First Operand is R0, immediate Second Operand is 1, Destination Register is R0 
-Read Registers: R0 = 10
-EXECUTE: MOV value of 1 in R0
+FETCH instruction 0xE3A03000 from address 0x4
+DECODE: Operation is MOV, First Operand is R0, immediate Second Operand is 0, Destination Register is R3 
+Read Registers: R0 = 0
+EXECUTE: MOV value of 0 in R3
 MEMORY: No memory operation 
-WRITEBACK: write 1 to R0 
+WRITEBACK: write 0 to R3 
 
-FETCH instruction 0xEF00006B from address 0xC
-DECODE: Operation is  Write integer to File  
-EXECUTE: No Execution 
+FETCH instruction 0xE3A05000 from address 0x8
+DECODE: Operation is MOV, First Operand is R0, immediate Second Operand is 0, Destination Register is R5 
+Read Registers: R0 = 0
+EXECUTE: MOV value of 0 in R5
 MEMORY: No memory operation 
-WRITEBACK: 10 is Written to Console from Register 1
-FETCH instruction  0xEF000011 from address 0x1
+WRITEBACK: write 0 to R5 
+
+FETCH instruction 0xE5842000 from address 0xC
+DECODE: Operation is STR, Base Register is R4, Offset is 0, Destination Register is R2
+EXECUTE: Put R4's value in element number 1 in R2
+MEMORY: Load 0 from memory 
+WRITEBACK: write 0 to memory array 
+
+FETCH instruction  0xE2822001 from address 0x1
+DECODE: Operation is ADD, First Operand is R2, immediate Second Operand is 1, Destination Register is R2 
+Read Registers: R2 = 0
+EXECUTE: ADD 0 and 1
+MEMORY: No memory operation 
+WRITEBACK: write 1 to R2 
+
+FETCH instruction  0xE5842004 from address 0x1
+DECODE: Operation is STR, Base Register is R4, Offset is 4, Destination Register is R2
+EXECUTE: Put R4's value in element number 2 in R2
+MEMORY: Load 0 from memory 
+WRITEBACK: write 1 to memory array 
+
+FETCH instruction  0xE2822001 from address 0x1
+DECODE: Operation is ADD, First Operand is R2, immediate Second Operand is 1, Destination Register is R2 
+Read Registers: R2 = 1
+EXECUTE: ADD 1 and 1
+MEMORY: No memory operation 
+WRITEBACK: write 2 to R2 
+
+FETCH instruction  0xE5842008 from address 0x1
+DECODE: Operation is STR, Base Register is R4, Offset is 8, Destination Register is R2
+EXECUTE: Put R4's value in element number 3 in R2
+MEMORY: Load 0 from memory 
+WRITEBACK: write 2 to memory array 
+
+FETCH instruction  0xE2822001 from address 0x2
+DECODE: Operation is ADD, First Operand is R2, immediate Second Operand is 1, Destination Register is R2 
+Read Registers: R2 = 2
+EXECUTE: ADD 2 and 1
+MEMORY: No memory operation 
+WRITEBACK: write 3 to R2 
+
+FETCH instruction  0xE584200C from address 0x2
+DECODE: Operation is STR, Base Register is R4, Offset is 12, Destination Register is R2
+EXECUTE: Put R4's value in element number 4 in R2
+MEMORY: Load 0 from memory 
+WRITEBACK: write 3 to memory array 
+
+FETCH instruction  0xE2822001 from address 0x2
+DECODE: Operation is ADD, First Operand is R2, immediate Second Operand is 1, Destination Register is R2 
+Read Registers: R2 = 3
+EXECUTE: ADD 3 and 1
+MEMORY: No memory operation 
+WRITEBACK: write 4 to R2 
+
+FETCH instruction  0xE5842010 from address 0x2
+DECODE: Operation is STR, Base Register is R4, Offset is 16, Destination Register is R2
+EXECUTE: Put R4's value in element number 5 in R2
+MEMORY: Load 0 from memory 
+WRITEBACK: write 4 to memory array 
+
+FETCH instruction  0xE3A02000 from address 0x3
+DECODE: Operation is MOV, First Operand is R0, immediate Second Operand is 0, Destination Register is R2 
+Read Registers: R0 = 0
+EXECUTE: MOV value of 0 in R2
+MEMORY: No memory operation 
+WRITEBACK: write 0 to R2 
+
+FETCH instruction  0xE5942000 from address 0x3
+DECODE: Operation is LDR, Base Register is R4, Offset is 0, Destination Register is R2
+EXECUTE: Put in R2,R4's element number 1
+MEMORY: Store 2 in memory 
+WRITEBACK: write 0 to R2 
+
+FETCH instruction  0xE0855002 from address 0x3
+DECODE: Operation is ADD, First Operand is R5, Second Operand is R2, Destination Register is R5 
+Read Registers: R5 = 0, R2 = 0
+EXECUTE: ADD 0 and 0
+MEMORY: No memory operation 
+WRITEBACK: write 0 to R5 
+
+FETCH instruction  0xE5942004 from address 0x3
+DECODE: Operation is LDR, Base Register is R4, Offset is 4, Destination Register is R2
+EXECUTE: Put in R2,R4's element number 2
+MEMORY: Store 2 in memory 
+WRITEBACK: write 1 to R2 
+
+FETCH instruction  0xE0855002 from address 0x4
+DECODE: Operation is ADD, First Operand is R5, Second Operand is R2, Destination Register is R5 
+Read Registers: R5 = 0, R2 = 1
+EXECUTE: ADD 0 and 1
+MEMORY: No memory operation 
+WRITEBACK: write 1 to R5 
+
+FETCH instruction  0xE5942008 from address 0x4
+DECODE: Operation is LDR, Base Register is R4, Offset is 8, Destination Register is R2
+EXECUTE: Put in R2,R4's element number 3
+MEMORY: Store 2 in memory 
+WRITEBACK: write 2 to R2 
+
+FETCH instruction  0xE0855002 from address 0x4
+DECODE: Operation is ADD, First Operand is R5, Second Operand is R2, Destination Register is R5 
+Read Registers: R5 = 1, R2 = 2
+EXECUTE: ADD 1 and 2
+MEMORY: No memory operation 
+WRITEBACK: write 3 to R5 
+
+FETCH instruction  0xE594200C from address 0x4
+DECODE: Operation is LDR, Base Register is R4, Offset is 12, Destination Register is R2
+EXECUTE: Put in R2,R4's element number 4
+MEMORY: Store 2 in memory 
+WRITEBACK: write 3 to R2 
+
+FETCH instruction  0xE0855002 from address 0x5
+DECODE: Operation is ADD, First Operand is R5, Second Operand is R2, Destination Register is R5 
+Read Registers: R5 = 3, R2 = 3
+EXECUTE: ADD 3 and 3
+MEMORY: No memory operation 
+WRITEBACK: write 6 to R5 
+
+FETCH instruction  0xE5942010 from address 0x5
+DECODE: Operation is LDR, Base Register is R4, Offset is 16, Destination Register is R2
+EXECUTE: Put in R2,R4's element number 5
+MEMORY: Store 2 in memory 
+WRITEBACK: write 4 to R2 
+
+FETCH instruction  0xE0855002 from address 0x5
+DECODE: Operation is ADD, First Operand is R5, Second Operand is R2, Destination Register is R5 
+Read Registers: R5 = 6, R2 = 4
+EXECUTE: ADD 6 and 4
+MEMORY: No memory operation 
+WRITEBACK: write 10 to R5 
+
+FETCH instruction  0xE5845014 from address 0x5
+DECODE: Operation is STR, Base Register is R4, Offset is 20, Destination Register is R5
+EXECUTE: Put R4's value in element number 6 in R5
+MEMORY: Load 0 from memory 
+WRITEBACK: write 10 to memory array 
+
+FETCH instruction  0xEF000011 from address 0x6
 DECODE: Operation is Exit 
 EXIT: 
 
