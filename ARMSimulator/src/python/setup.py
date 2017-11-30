@@ -60,3 +60,5 @@ temp = {0: [0] * 1024,
         13: [0] * 1024,
         14: [0] * 1024,
         15: [0] * 1024}
+
+swi = { 0x6b: " Write integer to File ", 0x6c: 'Read integer from file', 0x11: "Exit"}

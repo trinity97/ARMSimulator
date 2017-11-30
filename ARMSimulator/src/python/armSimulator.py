@@ -11,7 +11,7 @@ d=0
 
 def run_arm_simulator():
 
-    while setup.flag != 3:
+    while True:
         fetch()
         decode()
         execute()
@@ -90,6 +90,15 @@ def decode():
               setup.cond_to_instruction.get(setup.cond))
         helper.write_to_out("DECODE: Operation is "+str(setup.cond_to_instruction.get(setup.cond))+"\n")
         setup.gui.editor("DECODE: Operation is "+str(setup.cond_to_instruction.get(setup.cond))+"\n")
+
+    elif setup.flag == 3:
+
+        mask = instruction & 0xFF
+        print("DECODE: Operation is %s " % (setup.swi.get(mask)) + "\n")
+        helper.write_to_out("DECODE: Operation is %s " % (setup.swi.get(mask)) + "\n")
+        setup.gui.editor("DECODE: Operation is %s " % (setup.swi.get(mask)) + "\n")
+
+
 
 
 def execute():
@@ -290,6 +299,12 @@ def execute():
 
                     setup.registers[15] = setup.registers[15] + 4 + setup.sig
 
+    elif setup.flag == 3:
+
+        print("EXECUTE: No Execution \n")
+        helper.write_to_out("EXECUTE: No Execution \n")
+        setup.gui.editor("EXECUTE: No Execution \n")
+
 
 def memory():
 
@@ -350,7 +365,20 @@ def write_back():
         helper.write_to_out("WRITEBACK: No writeback operation required \n")
         setup.gui.editor("WRITEBACK: No writeback operation required \n")
     elif setup.flag == 3:
-        print ("EXIT: \n")
-        helper.write_to_out("EXIT: \n")
-        setup.gui.editor("EXIT: \n")
+        mask = int(setup.inst[4:0], 0) & 0xFF
+        if mask == 0x11:
+            print("EXIT: \n")
+            helper.write_to_out("EXIT: \n")
+            setup.gui.editor("EXIT: \n")
+        elif mask == 0x6C:
+            helper.read()
+            print("WRITEBACK: %s is Read from Console and stored in Register 0" % str(setup.register[0]))
+            helper.write_to_out("WRITEBACK: %s is Read from File and stored in Register 0" % str(setup.register[0]))
+            setup.gui.editor("WRITEBACK: %s is Read from File and stored in Register 0" % str(setup.register[0]))
+        elif mask == 0x6B:
+            helper.write()
+            print("WRITEBACK: %s is Written to Console from Register 1" % str(setup.register[1]))
+            helper.write_to_out("WRITEBACK: %s is Written to Console from Register 1" % str(setup.register[1]))
+            setup.gui.editor("WRITEBACK: %s is Written to Console from Register 1" % str(setup.register[1]))
+
     setup.gui.registers()

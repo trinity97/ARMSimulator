@@ -20,6 +20,16 @@ def exit():
     sys.exit()
 
 
+def read():
+    if setup.registers[0] == 0:
+        setup.registers[0] = int(input())
+
+def write():
+    if setup.registers[0] == 1:
+        print(setup.registers[1])
+
+
+
 def print_execute(index):
     print("EXECUTE: %s %d and %d " % (setup.op_to_instruction.get(index),setup.registers[setup.firstOperand],setup.registers[setup.secondOperand]))
     write_to_out("EXECUTE: "+str(setup.op_to_instruction.get(index))+" "+str(setup.registers[setup.firstOperand]) + " and " + str(setup.registers[setup.secondOperand])+"\n")
@@ -113,3 +123,13 @@ def reset_values():
         setup.registers.append(0)
 
     # setup.gui = 0
+
+
+
+
+
+
+
+
+
+
